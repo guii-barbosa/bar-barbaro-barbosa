@@ -1,0 +1,61 @@
+# =========================
+# Build / Gradle
+# =========================
+.gradle/
+build/
+out/
+
+# =========================
+# IntelliJ / IDEs
+# =========================
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VSCode
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Spring Boot
+# =========================
+target/
+application-local.yml
+application-dev.yml
+application-prod.yml
+
+# =========================
+# Env / Secrets
+# =========================
+.env
+*.env
+
+# =========================
+# Java
+# =========================
+*.class
+*.jar
+*.war
+*.ear
+
+# =========================
+# DevTools restart
+# =========================
+.restart/
