@@ -1,24 +1,26 @@
 package com.guibs.bar_barbaro_barbosa.adventurous;
 
-import com.guibs.bar_barbaro_barbosa.calling.CallingEntity;
+import com.guibs.bar_barbaro_barbosa.affiliation.Affiliation;
+import com.guibs.bar_barbaro_barbosa.guild.Guild;
+import com.guibs.bar_barbaro_barbosa.mission.Mission;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 
 @Entity @Table(name="adventurous")
-public class AdventurousEntity {
+public class Adventurous {
 
         @Id
         @GeneratedValue(strategy =  GenerationType.SEQUENCE)
         @Column(name="id_adventurous")
-        private long id;
+        private Long id;
 
         @Column(name="nm_adventurous")
         private String name;
@@ -44,9 +46,21 @@ public class AdventurousEntity {
         @Column(name="dt_desativation")
         private LocalDate deletedAt;
 
-        @ManyToOne
-        @JoinColumn(name="cd_calling")
-        private CallingEntity calling;
+        @Enumerated(EnumType.ORDINAL)
+        @Column(name="cd_calling")
+        private Calling calling;
+
+        @OneToMany(mappedBy = "creator")
+        private List<Guild> guildList;
+
+        @OneToMany(mappedBy = "adventurous")
+        private List<Affiliation> affiliationList;
+
+        @OneToMany(mappedBy = "adventurous")
+        private List<Mission> missionAssignedList;
+
+        @OneToMany(mappedBy = "creator")
+        private List<Mission> missionCreatedList;
 
         @PrePersist
         public void prePersist(){

@@ -39,7 +39,7 @@ CREATE TABLE guild
     dt_creation    TIMESTAMP   NOT NULL,
     dt_updated     TIMESTAMP,
     CONSTRAINT fk_guild_owner
-        FOREIGN KEY (cd_adventurous) REFERENCES adventurous (id_user)
+        FOREIGN KEY (cd_adventurous) REFERENCES adventurous (id_adventurous)
 );
 
 ALTER TABLE guild
@@ -102,7 +102,7 @@ CREATE TABLE mission
     dt_end         TIMESTAMP    NOT NULL,
     nr_position    INTEGER      NOT NULL,
     cd_board       INTEGER      NOT NULL,
-    cd_owner       INTEGER      NOT NULL,
+    cd_creator     INTEGER      NOT NULL,
     cd_adventurous INTEGER,
     cd_priority    INTEGER      NOT NULL,
     dt_creation    TIMESTAMP    NOT NULL,
@@ -110,9 +110,9 @@ CREATE TABLE mission
     CONSTRAINT fk_mission_board
         FOREIGN KEY (cd_board) REFERENCES board (id_board),
     CONSTRAINT fk_mission_user
-        FOREIGN KEY (cd_adventurous) REFERENCES adventurous (id_user),
+        FOREIGN KEY (cd_adventurous) REFERENCES adventurous (id_adventurous),
     CONSTRAINT fk_mission_owner
-        FOREIGN KEY (cd_owner) REFERENCES adventurous (id_user),
+        FOREIGN KEY (cd_creator) REFERENCES adventurous (id_adventurous),
     CONSTRAINT fk_mission_priority
         FOREIGN KEY (cd_priority) REFERENCES priority (id_priority)
 );
@@ -127,8 +127,9 @@ CREATE TABLE rune
 (
     id_rune     SERIAL PRIMARY KEY,
     nm_rune     VARCHAR(50) NOT NULL,
-    lk_img_form VARCHAR(255),
-    cd_guild    INTEGER     NOT NULL ds_color    VARCHAR(7) NOT NULL,
+    lk_image    VARCHAR(255),
+    ds_color    VARCHAR(7) NOT NULL
+    cd_guild    INTEGER     NOT NULL,
     dt_creation TIMESTAMP   NOT NULL,
     CONSTRAINT fk_rune_guild
         FOREIGN KEY (cd_guild) REFERENCES guild (id_guild)
@@ -145,7 +146,6 @@ CREATE TABLE requirement
     id_mission_rune SERIAL PRIMARY KEY,
     cd_mission      INTEGER   NOT NULL,
     cd_rune         INTEGER   NOT NULL,
-    dt_creation     TIMESTAMP NOT NULL,
     CONSTRAINT fk_requirement_mission
         FOREIGN KEY (cd_mission) REFERENCES mission (id_mission),
     CONSTRAINT fk_requirement_rune
@@ -164,7 +164,6 @@ CREATE TABLE race
     nm_race     VARCHAR(50)  NOT NULL,
     ds_race     VARCHAR(255) NOT NULL,
     dt_creation TIMESTAMP    NOT NULL,
-    dt_update   TIMESTAMP
 );
 
 -- =========================
@@ -181,7 +180,7 @@ CREATE TABLE affiliation
     CONSTRAINT fk_affiliation_race
         FOREIGN KEY (cd_race) REFERENCES race (id_race),
     CONSTRAINT fk_affiliation_user
-        FOREIGN KEY (cd_adventurous) REFERENCES adventurous (id_user),
+        FOREIGN KEY (cd_adventurous) REFERENCES adventurous (id_adventurous),
     CONSTRAINT fk_affiliation_guild
         FOREIGN KEY (cd_guild) REFERENCES guild (id_guild)
 );
@@ -190,13 +189,13 @@ ALTER TABLE affiliation
     ADD CONSTRAINT unique_affiliation UNIQUE (cd_race, cd_guild, cd_adventurous);
 
 -- =========================
--- ACTION
+-- ABILITY
 -- =========================
-CREATE TABLE action
+CREATE TABLE ability
 (
-    id_action SERIAL PRIMARY KEY,
-    nm_action VARCHAR(50) NOT NULL,
-    dt_action TIMESTAMP   NOT NULL
+    id_ability SERIAL PRIMARY KEY,
+    nm_ability VARCHAR(50) NOT NULL,
+    dt_creation TIMESTAMP   NOT NULL
 );
 
 -- =========================
@@ -204,8 +203,8 @@ CREATE TABLE action
 -- =========================
 CREATE TABLE resource
 (
-    id_table    SERIAL PRIMARY KEY,
-    nm_table    VARCHAR(50) NOT NULL,
+    id_resourcr    SERIAL PRIMARY KEY,
+    nm_resourcr    VARCHAR(50) NOT NULL,
     dt_creation TIMESTAMP   NOT NULL
 );
 
@@ -216,13 +215,13 @@ CREATE TABLE attribute
 (
     id_attribute SERIAL PRIMARY KEY,
     cd_race      INTEGER   NOT NULL,
-    cd_action    INTEGER   NOT NULL,
-    cd_table     INTEGER   NOT NULL,
+    cd_ability    INTEGER   NOT NULL,
+    cd_resource     INTEGER   NOT NULL,
     dt_creation  TIMESTAMP NOT NULL,
     CONSTRAINT fk_attribute_race
         FOREIGN KEY (cd_race) REFERENCES race (id_race),
-    CONSTRAINT fk_attribute_action
-        FOREIGN KEY (cd_action) REFERENCES action (id_action),
+    CONSTRAINT fk_attribute_ability
+        FOREIGN KEY (cd_ability) REFERENCES ability (id_ability),
     CONSTRAINT fk_attribute_resource
-        FOREIGN KEY (cd_table) REFERENCES resource (id_table)
+        FOREIGN KEY (cd_resource) REFERENCES resource (id_resource)
 );

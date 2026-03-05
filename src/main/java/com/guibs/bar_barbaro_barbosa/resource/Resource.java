@@ -1,9 +1,7 @@
-package com.guibs.bar_barbaro_barbosa.calling;
+package com.guibs.bar_barbaro_barbosa.resource;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.guibs.bar_barbaro_barbosa.adventurous.AdventurousEntity;
+import com.guibs.bar_barbaro_barbosa.attribute.Atributte;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,26 +13,26 @@ import java.util.List;
 @Getter
 @Setter
 
-@Entity @Table(name="calling")
-public class CallingEntity {
+@Entity @Table(name="resource")
+public class Resource {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.SEQUENCE)
-    @Column(name="id_calling")
-    private long id;
+    @Column(name="id_resource")
+    private Long id;
 
-    @Column(name="nm_calling")
+    @Column(name="ds_resource")
     private String name;
+
+    @OneToMany(mappedBy = "resource")
+    private List<Atributte> atributteList;
 
     @Column(name="dt_creation")
     private LocalDate createdAt;
-
-    @OneToMany(mappedBy="calling")
-    @JsonIgnore
-    private List<AdventurousEntity> adventurous;
 
     @PrePersist
     public void prePersist(){
         this.createdAt = LocalDate.now();
     }
+
 }

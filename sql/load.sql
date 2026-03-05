@@ -4,7 +4,7 @@
 INSERT INTO race (id_race, nm_race, ds_race, dt_creation)
 VALUES (1, 'ARCANE', 'Full control over guilds, campaigns, missions and runes', NOW()),
        (2, 'ELF', 'Can create campaigns, missions and runes', NOW()),
-       (3, 'DWARF', 'Can create missions only', NOW()),
+       (3, 'DWARF', 'Can create missé ions only', NOW()),
        (4, 'HUMAN', 'Can only self-assign and execute missions', NOW());
 
 INSERT INTO action (nm_action, dt_action)
