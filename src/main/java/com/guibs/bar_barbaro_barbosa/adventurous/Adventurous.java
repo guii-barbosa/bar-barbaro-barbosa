@@ -25,7 +25,7 @@ public class Adventurous {
         @Column(name="nm_adventurous")
         private String name;
 
-        @Column(name="nm_nickname")
+        @Column(name="nm_alias")
         private String nickname;
 
         @Column(name="ds_email")

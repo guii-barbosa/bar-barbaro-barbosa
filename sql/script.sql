@@ -82,12 +82,12 @@ ALTER TABLE board
     ADD CONSTRAINT unique_board UNIQUE (nm_board, cd_campaign);
 
 -- =========================
--- PRIORITY
+-- rarity
 -- =========================
-CREATE TABLE priority
+CREATE TABLE rarity
 (
-    id_priority INTEGER PRIMARY KEY,
-    nm_priority VARCHAR(50) NOT NULL,
+    id_rarity INTEGER PRIMARY KEY,
+    nm_rarity VARCHAR(50) NOT NULL,
     dt_creation TIMESTAMP   NOT NULL
 );
 
@@ -104,7 +104,7 @@ CREATE TABLE mission
     cd_board       INTEGER      NOT NULL,
     cd_creator     INTEGER      NOT NULL,
     cd_adventurous INTEGER,
-    cd_priority    INTEGER      NOT NULL,
+    cd_rarity    INTEGER      NOT NULL,
     dt_creation    TIMESTAMP    NOT NULL,
     dt_updated     TIMESTAMP,
     CONSTRAINT fk_mission_board
@@ -113,8 +113,8 @@ CREATE TABLE mission
         FOREIGN KEY (cd_adventurous) REFERENCES adventurous (id_adventurous),
     CONSTRAINT fk_mission_owner
         FOREIGN KEY (cd_creator) REFERENCES adventurous (id_adventurous),
-    CONSTRAINT fk_mission_priority
-        FOREIGN KEY (cd_priority) REFERENCES priority (id_priority)
+    CONSTRAINT fk_mission_rarity
+        FOREIGN KEY (cd_rarity) REFERENCES rarity (id_rarity)
 );
 
 ALTER TABLE mission
@@ -128,7 +128,7 @@ CREATE TABLE rune
     id_rune     SERIAL PRIMARY KEY,
     nm_rune     VARCHAR(50) NOT NULL,
     lk_image    VARCHAR(255),
-    ds_color    VARCHAR(7) NOT NULL
+    ds_color    VARCHAR(7),
     cd_guild    INTEGER     NOT NULL,
     dt_creation TIMESTAMP   NOT NULL,
     CONSTRAINT fk_rune_guild
@@ -163,7 +163,7 @@ CREATE TABLE race
     id_race     SERIAL PRIMARY KEY,
     nm_race     VARCHAR(50)  NOT NULL,
     ds_race     VARCHAR(255) NOT NULL,
-    dt_creation TIMESTAMP    NOT NULL,
+    dt_creation TIMESTAMP    NOT NULL
 );
 
 -- =========================
@@ -176,7 +176,7 @@ CREATE TABLE affiliation
     cd_adventurous INTEGER   NOT NULL,
     cd_guild       INTEGER   NOT NULL,
     dt_creation    TIMESTAMP NOT NULL,
-    dt_updated     TIMESTAMP NOT NULL,
+    dt_updated     TIMESTAMP,
     CONSTRAINT fk_affiliation_race
         FOREIGN KEY (cd_race) REFERENCES race (id_race),
     CONSTRAINT fk_affiliation_user
@@ -199,12 +199,12 @@ CREATE TABLE ability
 );
 
 -- =========================
--- RESOURCE (table)
+-- artefact (table)
 -- =========================
-CREATE TABLE resource
+CREATE TABLE artefact
 (
-    id_resourcr    SERIAL PRIMARY KEY,
-    nm_resourcr    VARCHAR(50) NOT NULL,
+    id_artefact    SERIAL PRIMARY KEY,
+    nm_artefact    VARCHAR(50) NOT NULL,
     dt_creation TIMESTAMP   NOT NULL
 );
 
@@ -216,12 +216,12 @@ CREATE TABLE attribute
     id_attribute SERIAL PRIMARY KEY,
     cd_race      INTEGER   NOT NULL,
     cd_ability    INTEGER   NOT NULL,
-    cd_resource     INTEGER   NOT NULL,
+    cd_artefact     INTEGER   NOT NULL,
     dt_creation  TIMESTAMP NOT NULL,
     CONSTRAINT fk_attribute_race
         FOREIGN KEY (cd_race) REFERENCES race (id_race),
     CONSTRAINT fk_attribute_ability
         FOREIGN KEY (cd_ability) REFERENCES ability (id_ability),
-    CONSTRAINT fk_attribute_resource
-        FOREIGN KEY (cd_resource) REFERENCES resource (id_resource)
+    CONSTRAINT fk_attribute_artefact
+        FOREIGN KEY (cd_artefact) REFERENCES artefact (id_artefact)
 );

@@ -7,42 +7,101 @@ VALUES (1, 'ARCANE', 'Full control over guilds, campaigns, missions and runes', 
        (3, 'DWARF', 'Can create missé ions only', NOW()),
        (4, 'HUMAN', 'Can only self-assign and execute missions', NOW());
 
-INSERT INTO action (nm_action, dt_action)
-VALUES ('CREATE', NOW()),
-       ('READ', NOW()),
-       ('UPDATE', NOW()),
-       ('DELETE', NOW());
+INSERT INTO ability (nm_ability, dt_creation)
+VALUES ('CONJURE', NOW()),
+       ('OBSERVE', NOW()),
+       ('TRANSMUTE', NOW()),
+       ('BANISH', NOW()),
+       ('BESTOW', NOW());   
 
-INSERT INTO resource (nm_table, dt_creation)
+INSERT INTO artefact (nm_artefact, dt_creation)
 VALUES ('GUILD', NOW()),
        ('CAMPAIGN', NOW()),
+       ('BOARD', NOW()),
        ('MISSION', NOW()),
        ('RUNE', NOW());
 
--- ARCANE
-INSERT INTO attribute (cd_race, cd_action, cd_table, dt_creation)
-SELECT 1, a.id_action, r.id_table, NOW()
-FROM action a,
-     resource r;
 
--- ELF
-INSERT INTO attribute (cd_race, cd_action, cd_table, dt_creation)
-SELECT 2, a.id_action, r.id_table, NOW()
-FROM action a
-         JOIN resource r ON r.nm_table IN ('CAMPAIGN', 'MISSION', 'RUNE');
+--ARCANE
+INSERT INTO attribute (cd_race, cd_ability, cd_artefact, dt_creation)
+VALUES
 
--- DWARF
-INSERT INTO attribute (cd_race, cd_action, cd_table, dt_creation)
-SELECT 3, a.id_action, r.id_table, NOW()
-FROM action a
-         JOIN resource r ON r.nm_table = 'MISSION';
+(1,1,1,NOW()),
+(1,2,1,NOW()),
+(1,3,1,NOW()),
+(1,4,1,NOW()),
+
+(1,1,2,NOW()),
+(1,2,2,NOW()),
+(1,3,2,NOW()),
+(1,4,2,NOW()),
+
+(1,1,3,NOW()),
+(1,2,3,NOW()),
+(1,3,3,NOW()),
+(1,4,3,NOW()),
+
+(1,1,4,NOW()),
+(1,2,4,NOW()),
+(1,3,4,NOW()),
+(1,4,4,NOW()),
+(1,5,4,NOW()),
+
+(1,1,5,NOW()),
+(1,2,5,NOW()),
+(1,3,5,NOW()),
+(1,4,5,NOW()),
+
+
+--ELF
+(2,2,1,NOW()),
+
+(2,1,2,NOW()),
+(2,2,2,NOW()),
+(2,3,2,NOW()),
+(2,4,2,NOW()),
+
+(2,1,3,NOW()),
+(2,2,3,NOW()),
+(2,3,3,NOW()),
+(2,4,3,NOW()),
+
+(2,1,4,NOW()),
+(2,2,4,NOW()),
+(2,3,4,NOW()),
+(2,4,4,NOW()),
+(2,5,4,NOW()),
+
+(2,1,5,NOW()),
+(2,2,5,NOW()),
+(2,3,5,NOW()),
+(2,4,5,NOW()),
+
+--DWARF
+(3,2,1,NOW()),
+(3,2,2,NOW()),
+(3,2,5,NOW()),
+
+(3,1,3,NOW()),
+(3,2,3,NOW()),
+(3,3,3,NOW()),
+(3,4,3,NOW()),
+
+(3,1,4,NOW()),
+(3,2,4,NOW()),
+(3,3,4,NOW()),
+(3,4,4,NOW()),
+(3,5,4,NOW()),
 
 -- HUMAN
-INSERT INTO attribute (cd_race, cd_action, cd_table, dt_creation)
-SELECT 4, a.id_action, r.id_table, NOW()
-FROM action a
-         JOIN resource r ON r.nm_table = 'MISSION'
-WHERE a.nm_action = 'ASSIGN';
+(4,2,1,NOW()),
+(4,2,2,NOW()),
+(4,2,3,NOW()),
+(4,2,4,NOW()),
+(4,2,5,NOW()),
+
+(4,5,4,NOW());
+
 
 -- =========================
 -- USER
@@ -132,43 +191,42 @@ VALUES ('Backlog', 1, 1, NOW()),
        ('Open Rebellion', 4, 5, NOW()),
        ('Crown Restored', 5, 5, NOW());
 
-INSERT INTO priority (id_priority, nm_priority, dt_creation)
-VALUES (1, 'LOW', NOW()),
-       (2, 'MEDIUM', NOW()),
-       (3, 'HIGH', NOW()),
+INSERT INTO rarity (id_rarity, nm_rarity, dt_creation)
+VALUES (1, 'COMMON', NOW()),
+       (2, 'RARE', NOW()),
+       (3, 'EPIC', NOW()),
        (4, 'LEGENDARY', NOW());
 
-INSERT INTO mission
-(nm_mission, dt_start, dt_end, nr_position, cd_board, cd_adventurous, cd_priority, dt_creation)
-VALUES ('Design authentication architecture', NOW(), NOW() + INTERVAL '10 days', 1, 1, 3, 3, NOW()),
-       ('Define microservice boundaries', NOW(), NOW() + INTERVAL '7 days', 1, 2, 7, 2, NOW()),
-       ('Implement JWT security layer', NOW(), NOW() + INTERVAL '5 days', 1, 3, 1, 3, NOW()),
-       ('Review payment integration PR', NOW(), NOW() + INTERVAL '2 days', 1, 4, 13, 2, NOW()),
-       ('Deploy v1.0 to production', NOW() - INTERVAL '3 days', NOW() - INTERVAL '1 day', 1, 5, 1, 4, NOW()),
+INSERT INTO mission(nm_mission, dt_start, dt_end, nr_position, cd_board, cd_creator, cd_adventurous, cd_rarity, dt_creation)
+VALUES
+('Design authentication architecture', NOW(), NOW() + INTERVAL '10 days', 1, 1, 1, 3, 3, NOW()),
+('Define microservice boundaries', NOW(), NOW() + INTERVAL '7 days', 1, 2, 1, 7, 2, NOW()),
+('Implement JWT security layer', NOW(), NOW() + INTERVAL '5 days', 1, 3, 3, 1, 3, NOW()),
+('Review payment integration PR', NOW(), NOW() + INTERVAL '2 days', 1, 4, 1, 13, 2, NOW()),
+('Deploy v1.0 to production', NOW() - INTERVAL '3 days', NOW() - INTERVAL '1 day', 1, 5, 1, 7, 4, NOW()),
 
-       ('Define app navigation flow', NOW(), NOW() + INTERVAL '6 days', 1, 6, 4, 2, NOW()),
-       ('Refine push notification strategy', NOW(), NOW() + INTERVAL '4 days', 1, 7, 7, 2, NOW()),
-       ('Implement dark mode UI', NOW(), NOW() + INTERVAL '8 days', 1, 8, 3, 3, NOW()),
-       ('Code review mobile API integration', NOW(), NOW() + INTERVAL '2 days', 1, 9, 1, 2, NOW()),
-       ('Publish beta to app stores', NOW() - INTERVAL '5 days', NOW() - INTERVAL '1 day', 1, 10, 1, 4, NOW()),
+('Define app navigation flow', NOW(), NOW() + INTERVAL '6 days', 1, 6, 1, 4, 2, NOW()),
+('Refine push notification strategy', NOW(), NOW() + INTERVAL '4 days', 1, 7, 1, 7, 2, NOW()),
+('Implement dark mode UI', NOW(), NOW() + INTERVAL '8 days', 1, 8, 3, 1, 3, NOW()),
+('Code review mobile API integration', NOW(), NOW() + INTERVAL '2 days', 1, 9, 1, 7, 2, NOW()),
+('Publish beta to app stores', NOW() - INTERVAL '5 days', NOW() - INTERVAL '1 day', 1, 10, 1, 3, 4, NOW()),
 
-       ('List algebra topics for exam', NOW(), NOW() + INTERVAL '3 days', 1, 11, 2, 2, NOW()),
-       ('Study calculus derivatives', NOW(), NOW() + INTERVAL '5 days', 1, 12, 6, 3, NOW()),
-       ('Solve 50 geometry exercises', NOW(), NOW() + INTERVAL '4 days', 1, 13, 15, 3, NOW()),
-       ('Complete full mock exam simulation', NOW() - INTERVAL '7 days', NOW() - INTERVAL '2 days', 1, 14, 2, 4, NOW()),
+('List algebra topics for exam', NOW(), NOW() + INTERVAL '3 days', 1, 11, 2, 15, 2, NOW()),
+('Study calculus derivatives', NOW(), NOW() + INTERVAL '5 days', 1, 12, 6, 2, 3, NOW()),
+('Solve 50 geometry exercises', NOW(), NOW() + INTERVAL '4 days', 1, 13, 6, 15, 3, NOW()),
+('Complete full mock exam simulation', NOW() - INTERVAL '7 days', NOW() - INTERVAL '2 days', 1, 14, 2, 6, 4, NOW()),
 
-       ('Brainstorm new brand slogan', NOW(), NOW() + INTERVAL '3 days', 1, 15, 5, 2, NOW()),
-       ('Produce Instagram teaser video', NOW(), NOW() + INTERVAL '6 days', 1, 16, 10, 3, NOW()),
-       ('Launch influencer partnership campaign', NOW(), NOW() + INTERVAL '10 days', 1, 17, 13, 4, NOW()),
-       ('Analyze engagement metrics week 1', NOW(), NOW() + INTERVAL '2 days', 1, 18, 5, 2, NOW()),
+('Brainstorm new brand slogan', NOW(), NOW() + INTERVAL '3 days', 1, 15, 5, 10, 2, NOW()),
+('Produce Instagram teaser video', NOW(), NOW() + INTERVAL '6 days', 1, 16, 5, 13, 3, NOW()),
+('Launch influencer partnership campaign', NOW(), NOW() + INTERVAL '10 days', 1, 17, 5, 13, 4, NOW()),
+('Analyze engagement metrics week 1', NOW(), NOW() + INTERVAL '2 days', 1, 18, 5, 10, 2, NOW()),
 
-       ('Investigate rumors in the capital tavern', NOW(), NOW() + INTERVAL '2 days', 1, 19, 9, 2, NOW()),
-       ('Negotiate alliance with northern clans', NOW(), NOW() + INTERVAL '4 days', 1, 20, 12, 3, NOW()),
-       ('Lead assault on the royal fortress', NOW(), NOW() + INTERVAL '3 days', 1, 21, 8, 4, NOW()),
-       ('Secure the throne and restore order', NOW() - INTERVAL '6 days', NOW() - INTERVAL '1 day', 1, 22, 8, 4, NOW());
+('Investigate rumors in the capital tavern', NOW(), NOW() + INTERVAL '2 days', 1, 19, 8, 9, 2, NOW()),
+('Negotiate alliance with northern clans', NOW(), NOW() + INTERVAL '4 days', 1, 20, 8, 12, 3, NOW()),
+('Lead assault on the royal fortress', NOW(), NOW() + INTERVAL '3 days', 1, 21, 8, 14, 4, NOW()),
+('Secure the throne and restore order', NOW() - INTERVAL '6 days', NOW() - INTERVAL '1 day', 1, 22, 8, 12, 4, NOW());
 
-
-INSERT INTO rune (nm_rune, lk_img_form, cd_guild, ds_color, dt_creation)
+INSERT INTO rune (nm_rune, lk_image, cd_guild, ds_color, dt_creation)
 VALUES ('Backend', '#', 1, '#1E90FF', NOW()),
        ('Frontend', '#', 1, '#32CD32', NOW()),
        ('DevOps', '#', 1, '#8A2BE2', NOW()),
@@ -181,28 +239,43 @@ VALUES ('Backend', '#', 1, '#1E90FF', NOW()),
        ('Magic', '#', 4, '#9400D3', NOW());
 
 
-INSERT INTO requirement (cd_mission, cd_rune, dt_creation)
-VALUES (1, 1, NOW()),
-       (2, 1, NOW()),
-       (3, 3, NOW()),
-       (4, 1, NOW()),
-       (5, 3, NOW()),
-       (6, 2, NOW()),
-       (7, 3, NOW()),
-       (8, 2, NOW()),
-       (9, 1, NOW()),
-       (10, 3, NOW()),
-       (11, 4, NOW()),
-       (12, 4, NOW()),
-       (13, 4, NOW()),
-       (14, 5, NOW()),
-       (15, 7, NOW()),
-       (16, 7, NOW()),
-       (17, 6, NOW()),
-       (18, 6, NOW()),
-       (19, 9, NOW()),
-       (20, 9, NOW()),
-       (21, 8, NOW()),
-       (22, 8, NOW());
+INSERT INTO requirement (cd_mission, cd_rune)
+VALUES (1, 1),
+       (2, 1),
+       (3, 3),
+       (4, 1),
+       (5, 3),
+       (6, 2),
+       (7, 3),
+       (8, 2),
+       (9, 1),
+       (10, 3),
+       (11, 4),
+       (12, 4),
+       (13, 4),
+       (14, 5),
+       (15, 7),
+       (16, 7),
+       (17, 6),
+       (18, 6),
+       (19, 9),
+       (20, 9),
+       (21, 8),
+       (22, 8);
 
 COMMIT;
+
+
+DO $$ 
+DECLARE 
+    r RECORD;
+BEGIN
+    -- Busca todas as sequências que pertencem ao esquema 'public'
+    FOR r IN (SELECT sequence_name 
+              FROM information_schema.sequences 
+              WHERE sequence_schema = 'public') 
+    LOOP
+        -- Executa o restart para cada uma delas voltando para 1
+        EXECUTE 'ALTER SEQUENCE ' || quote_ident(r.sequence_name) || ' RESTART WITH 1';
+    END LOOP;
+END $$;

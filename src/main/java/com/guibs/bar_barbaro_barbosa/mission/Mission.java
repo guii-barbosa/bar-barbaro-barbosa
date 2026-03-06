@@ -36,8 +36,8 @@ public class Mission {
     private Integer position;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name="cd_priority")
-    private Priority priority;
+    @Column(name="cd_rarity")
+    private Rarity rarity;
 
     @ManyToOne
     @JoinColumn(name="cd_board")

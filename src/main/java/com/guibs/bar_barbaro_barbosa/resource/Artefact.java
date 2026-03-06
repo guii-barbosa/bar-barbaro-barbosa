@@ -13,15 +13,15 @@ import java.util.List;
 @Getter
 @Setter
 
-@Entity @Table(name="resource")
-public class Resource {
+@Entity @Table(name="artefact")
+public class Artefact {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.SEQUENCE)
-    @Column(name="id_resource")
+    @Column(name="id_artefact")
     private Long id;
 
-    @Column(name="ds_resource")
+    @Column(name="nm_artefact")
     private String name;
 
     @OneToMany(mappedBy = "resource")

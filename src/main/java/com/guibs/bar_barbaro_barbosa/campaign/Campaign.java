@@ -21,7 +21,7 @@ public class Campaign {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.SEQUENCE)
-    @Column(name="id_resource")
+    @Column(name="id_campaign")
     private Long id;
 
     @Column(name="nm_campaign")

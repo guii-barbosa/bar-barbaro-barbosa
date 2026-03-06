@@ -2,7 +2,7 @@ package com.guibs.bar_barbaro_barbosa.attribute;
 
 import com.guibs.bar_barbaro_barbosa.ability.Ability;
 import com.guibs.bar_barbaro_barbosa.race.Race;
-import com.guibs.bar_barbaro_barbosa.resource.Resource;
+import com.guibs.bar_barbaro_barbosa.resource.Artefact;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class Atributte {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.SEQUENCE)
-    @Column(name="id_atributte")
+    @Column(name="cd_artefact")
     private Long id;
 
     @ManyToOne
@@ -29,7 +29,7 @@ public class Atributte {
 
     @ManyToOne
     @JoinColumn(name="cd_resource")
-    private Resource resource;
+    private Artefact resource;
 
     @ManyToOne
     @JoinColumn(name="cd_ability")
