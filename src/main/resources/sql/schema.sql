@@ -1,30 +1,19 @@
--- =========================
--- CALLING
--- =========================
-CREATE TABLE calling
-(
-    id_calling  INTEGER PRIMARY KEY,
-    nm_calling  VARCHAR(50) NOT NULL,
-    dt_creation TIMESTAMP   NOT NULL
-);
 
 -- =========================
 -- ADVENTUROUS (USER)
 -- =========================
 CREATE TABLE adventurous
 (
-    id_adventurous         SERIAL PRIMARY KEY,
-    nm_user         VARCHAR(255)        NOT NULL,
+    id_adventurous  SERIAL PRIMARY KEY,
+    nm_adventurous  VARCHAR(255)        NOT NULL,
     nm_alias        VARCHAR(50)         NOT NULL,
     ds_email        VARCHAR(255) UNIQUE NOT NULL,
     ds_pswd         VARCHAR(50)         NOT NULL,
     ds_country      VARCHAR(50)         NOT NULL,
-    cd_calling      INTEGER             NOT NULL,
+    ds_calling      VARCHAR(50)         NOT NULL,
     dt_creation     TIMESTAMP           NOT NULL,
     dt_update       TIMESTAMP,
-    dt_desativation TIMESTAMP,
-    CONSTRAINT fk_adventurous_calling
-        FOREIGN KEY (cd_calling) REFERENCES calling (id_calling)
+    dt_desativation TIMESTAMP
 );
 
 -- =========================

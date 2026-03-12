@@ -2,6 +2,7 @@ package com.guibs.bar_barbaro_barbosa.mission;
 
 import com.guibs.bar_barbaro_barbosa.adventurous.Adventurous;
 import com.guibs.bar_barbaro_barbosa.board.Board;
+import com.guibs.bar_barbaro_barbosa.rarity.Rarity;
 import com.guibs.bar_barbaro_barbosa.rune.Rune;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -35,8 +36,8 @@ public class Mission {
     @Column(name="nr_position")
     private Integer position;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name="cd_rarity")
+    @ManyToOne
+    @JoinColumn(name="cd_rarity")
     private Rarity rarity;
 
     @ManyToOne

@@ -1,9 +1,10 @@
 package com.guibs.bar_barbaro_barbosa.adventurous;
 
 import com.guibs.bar_barbaro_barbosa.adventurous.dto.AdventurousGetDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.guibs.bar_barbaro_barbosa.adventurous.dto.AdventurousRegisterDto;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +19,15 @@ public class AdventurousController {
     }
 
     @GetMapping()
-    public List<AdventurousGetDto> getAll(){
-        return adventurousService.getAllAdventurous();
+    public ResponseEntity<List<AdventurousGetDto>> getAll(){
+        List<AdventurousGetDto> result =  adventurousService.getAllAdventurous();
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping()
+    public ResponseEntity<AdventurousGetDto> registerAdventurous(@Valid @RequestBody AdventurousRegisterDto adventurousRegisterDto){
+        AdventurousGetDto result = adventurousService.registerAdventurous(adventurousRegisterDto);
+        return ResponseEntity.status(201).body(result);
     }
 }

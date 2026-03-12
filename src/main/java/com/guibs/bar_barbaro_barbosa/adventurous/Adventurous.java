@@ -18,7 +18,7 @@ import java.util.List;
 public class Adventurous {
 
         @Id
-        @GeneratedValue(strategy =  GenerationType.SEQUENCE)
+        @GeneratedValue(strategy =  GenerationType.IDENTITY)
         @Column(name="id_adventurous")
         private Long id;
 
@@ -46,8 +46,8 @@ public class Adventurous {
         @Column(name="dt_desativation")
         private LocalDate deletedAt;
 
-        @Enumerated(EnumType.ORDINAL)
-        @Column(name="cd_calling")
+        @Enumerated(EnumType.STRING)
+        @Column(name="ds_calling")
         private Calling calling;
 
         @OneToMany(mappedBy = "creator")

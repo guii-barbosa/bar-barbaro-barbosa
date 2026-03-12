@@ -1,0 +1,15 @@
+GET http://localhost:8080/adventurous
+Accept: application/json
+
+###
+POST http://localhost:8080/adventurous
+Content-Type: application/json
+
+{
+    "name":"Laerte Costa",
+    "nickname":"lacoste05",
+    "calling":"WORK",
+    "country":"Brazil",
+    "email":"laertcosta5@hotmail.com",
+    "password":"lak@0525"
+}

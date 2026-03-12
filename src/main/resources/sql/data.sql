@@ -107,28 +107,24 @@ VALUES
 -- USER
 -- =========================
 
-INSERT INTO calling (id_calling, nm_calling, dt_creation)
-VALUES (1, 'SCHOOL', NOW()),
-       (2, 'WORK', NOW()),
-       (3, 'PERSONAL', NOW());
 
 INSERT INTO adventurous
-(nm_user, nm_alias, ds_email, ds_pswd, ds_country, cd_calling, dt_creation)
-VALUES ('Arthur Vale', 'IronWolf', 'arthur.vale@ironcitadel.tech', 'Arth0r!2026', 'UK', 2, NOW()),
-       ('Luna Bright', 'MoonSeer', 'luna.bright@silverlibrary.edu', 'Lun@Study9', 'USA', 1, NOW()),
-       ('Thorin Oak', 'StoneHand', 'thorin.oak@forgeworks.dev', 'St0ne#Hammer', 'Norway', 2, NOW()),
-       ('Elena Storm', 'SkyBlade', 'elena.storm@gmail.com', 'SkyBl@de7', 'Brazil', 3, NOW()),
-       ('Marcus Reed', 'ShadowQuill', 'marcus.reed@goldenmarket.co', 'Shad0w!Ink', 'Canada', 2, NOW()),
-       ('Isolde Night', 'SilverLeaf', 'isolde.night@academy.edu', 'Silv3r!Leaf', 'France', 1, NOW()),
-       ('Garen Holt', 'SteelGuard', 'garen.holt@ironcitadel.tech', 'Ste3l#Guard', 'Germany', 2, NOW()),
-       ('Nyx Raven', 'DarkRune', 'nyx.raven@outlook.com', 'DarkR@ven8', 'USA', 3, NOW()),
-       ('Cedric Dawn', 'LightBearer', 'cedric.dawn@student.edu', 'Light#123D', 'UK', 1, NOW()),
-       ('Helga Frost', 'IceForge', 'helga.frost@forgeworks.dev', 'IceF0rge!', 'Sweden', 2, NOW()),
-       ('Rowan Ash', 'GreenMind', 'rowan.ash@silverlibrary.edu', 'Gre3n@Mind', 'Ireland', 1, NOW()),
-       ('Kael Ember', 'FireBrand', 'kael.ember@yahoo.com', 'FireBr@nd6', 'Spain', 3, NOW()),
-       ('Seraphine Vale', 'StarWhisper', 'seraphine.vale@goldenmarket.co', 'St@rWh1sper', 'Italy', 2, NOW()),
-       ('Dorian Black', 'NightCrown', 'dorian.black@ironcitadel.tech', 'NightCr0wn!', 'USA', 2, NOW()),
-       ('Mira Sol', 'SunWeaver', 'mira.sol@student.edu', 'SunW3av3r@', 'Brazil', 1, NOW());
+(nm_adventurous, nm_alias, ds_email, ds_pswd, ds_country, ds_calling, dt_creation)
+VALUES ('Arthur Vale', 'IronWolf', 'arthur.vale@ironcitadel.tech', 'Arth0r!2026', 'UK', 'PERSONAL', NOW()),
+       ('Luna Bright', 'MoonSeer', 'luna.bright@silverlibrary.edu', 'Lun@Study9', 'USA', 'SCHOOL', NOW()),
+       ('Thorin Oak', 'StoneHand', 'thorin.oak@forgeworks.dev', 'St0ne#Hammer', 'Norway', 'PERSONAL', NOW()),
+       ('Elena Storm', 'SkyBlade', 'elena.storm@gmail.com', 'SkyBl@de7', 'Brazil', 'WORK', NOW()),
+       ('Marcus Reed', 'ShadowQuill', 'marcus.reed@goldenmarket.co', 'Shad0w!Ink', 'Canada', 'PERSONAL', NOW()),
+       ('Isolde Night', 'SilverLeaf', 'isolde.night@academy.edu', 'Silv3r!Leaf', 'France', 'SCHOOL', NOW()),
+       ('Garen Holt', 'SteelGuard', 'garen.holt@ironcitadel.tech', 'Ste3l#Guard', 'Germany', 'PERSONAL', NOW()),
+       ('Nyx Raven', 'DarkRune', 'nyx.raven@outlook.com', 'DarkR@ven8', 'USA', 'WORK', NOW()),
+       ('Cedric Dawn', 'LightBearer', 'cedric.dawn@student.edu', 'Light#123D', 'UK', 'SCHOOL', NOW()),
+       ('Helga Frost', 'IceForge', 'helga.frost@forgeworks.dev', 'IceF0rge!', 'Sweden', 'PERSONAL', NOW()),
+       ('Rowan Ash', 'GreenMind', 'rowan.ash@silverlibrary.edu', 'Gre3n@Mind', 'Ireland', 'SCHOOL', NOW()),
+       ('Kael Ember', 'FireBrand', 'kael.ember@yahoo.com', 'FireBr@nd6', 'Spain', 'WORK', NOW()),
+       ('Seraphine Vale', 'StarWhisper', 'seraphine.vale@goldenmarket.co', 'St@rWh1sper', 'Italy', 'PERSONAL', NOW()),
+       ('Dorian Black', 'NightCrown', 'dorian.black@ironcitadel.tech', 'NightCr0wn!', 'USA', 'PERSONAL', NOW()),
+       ('Mira Sol', 'SunWeaver', 'mira.sol@student.edu', 'SunW3av3r@', 'Brazil', 'SCHOOL', NOW());
 
 -- =========================
 -- GUILD
@@ -199,32 +195,32 @@ VALUES (1, 'COMMON', NOW()),
 
 INSERT INTO mission(nm_mission, dt_start, dt_end, nr_position, cd_board, cd_creator, cd_adventurous, cd_rarity, dt_creation)
 VALUES
-('Design authentication architecture', NOW(), NOW() + INTERVAL '10 days', 1, 1, 1, 3, 3, NOW()),
-('Define microservice boundaries', NOW(), NOW() + INTERVAL '7 days', 1, 2, 1, 7, 2, NOW()),
-('Implement JWT security layer', NOW(), NOW() + INTERVAL '5 days', 1, 3, 3, 1, 3, NOW()),
-('Review payment integration PR', NOW(), NOW() + INTERVAL '2 days', 1, 4, 1, 13, 2, NOW()),
-('Deploy v1.0 to production', NOW() - INTERVAL '3 days', NOW() - INTERVAL '1 day', 1, 5, 1, 7, 4, NOW()),
+('Design authentication architecture', NOW(), NOW() + INTERVAL '10' DAY, 1, 1, 1, 3, 3, NOW()),
+('Define microservice boundaries', NOW(), NOW() + INTERVAL '7' DAY, 1, 2, 1, 7, 2, NOW()),
+('Implement JWT security layer', NOW(), NOW() + INTERVAL '5' DAY, 1, 3, 3, 1, 3, NOW()),
+('Review payment integration PR', NOW(), NOW() + INTERVAL '2' DAY, 1, 4, 1, 13, 2, NOW()),
+('Deploy v1.0 to production', NOW() - INTERVAL '3' DAY, NOW() - INTERVAL '1' DAY, 1, 5, 1, 7, 4, NOW()),
 
-('Define app navigation flow', NOW(), NOW() + INTERVAL '6 days', 1, 6, 1, 4, 2, NOW()),
-('Refine push notification strategy', NOW(), NOW() + INTERVAL '4 days', 1, 7, 1, 7, 2, NOW()),
-('Implement dark mode UI', NOW(), NOW() + INTERVAL '8 days', 1, 8, 3, 1, 3, NOW()),
-('Code review mobile API integration', NOW(), NOW() + INTERVAL '2 days', 1, 9, 1, 7, 2, NOW()),
-('Publish beta to app stores', NOW() - INTERVAL '5 days', NOW() - INTERVAL '1 day', 1, 10, 1, 3, 4, NOW()),
+('Define app navigation flow', NOW(), NOW() + INTERVAL '6' DAY, 1, 6, 1, 4, 2, NOW()),
+('Refine push notification strategy', NOW(), NOW() + INTERVAL '4' DAY, 1, 7, 1, 7, 2, NOW()),
+('Implement dark mode UI', NOW(), NOW() + INTERVAL '8' DAY, 1, 8, 3, 1, 3, NOW()),
+('Code review mobile API integration', NOW(), NOW() + INTERVAL '2' DAY, 1, 9, 1, 7, 2, NOW()),
+('Publish beta to app stores', NOW() - INTERVAL '5' DAY, NOW() - INTERVAL '1' DAY, 1, 10, 1, 3, 4, NOW()),
 
-('List algebra topics for exam', NOW(), NOW() + INTERVAL '3 days', 1, 11, 2, 15, 2, NOW()),
-('Study calculus derivatives', NOW(), NOW() + INTERVAL '5 days', 1, 12, 6, 2, 3, NOW()),
-('Solve 50 geometry exercises', NOW(), NOW() + INTERVAL '4 days', 1, 13, 6, 15, 3, NOW()),
-('Complete full mock exam simulation', NOW() - INTERVAL '7 days', NOW() - INTERVAL '2 days', 1, 14, 2, 6, 4, NOW()),
+('List algebra topics for exam', NOW(), NOW() + INTERVAL '3' DAY, 1, 11, 2, 15, 2, NOW()),
+('Study calculus derivatives', NOW(), NOW() + INTERVAL '5' DAY, 1, 12, 6, 2, 3, NOW()),
+('Solve 50 geometry exercises', NOW(), NOW() + INTERVAL '4' DAY, 1, 13, 6, 15, 3, NOW()),
+('Complete full mock exam simulation', NOW() - INTERVAL '7' DAY, NOW() - INTERVAL '2' DAY, 1, 14, 2, 6, 4, NOW()),
 
-('Brainstorm new brand slogan', NOW(), NOW() + INTERVAL '3 days', 1, 15, 5, 10, 2, NOW()),
-('Produce Instagram teaser video', NOW(), NOW() + INTERVAL '6 days', 1, 16, 5, 13, 3, NOW()),
-('Launch influencer partnership campaign', NOW(), NOW() + INTERVAL '10 days', 1, 17, 5, 13, 4, NOW()),
-('Analyze engagement metrics week 1', NOW(), NOW() + INTERVAL '2 days', 1, 18, 5, 10, 2, NOW()),
+('Brainstorm new brand slogan', NOW(), NOW() + INTERVAL '3' DAY, 1, 15, 5, 10, 2, NOW()),
+('Produce Instagram teaser video', NOW(), NOW() + INTERVAL '6' DAY, 1, 16, 5, 13, 3, NOW()),
+('Launch influencer partnership campaign', NOW(), NOW() + INTERVAL '10' DAY, 1, 17, 5, 13, 4, NOW()),
+('Analyze engagement metrics week 1', NOW(), NOW() + INTERVAL '2' DAY, 1, 18, 5, 10, 2, NOW()),
 
-('Investigate rumors in the capital tavern', NOW(), NOW() + INTERVAL '2 days', 1, 19, 8, 9, 2, NOW()),
-('Negotiate alliance with northern clans', NOW(), NOW() + INTERVAL '4 days', 1, 20, 8, 12, 3, NOW()),
-('Lead assault on the royal fortress', NOW(), NOW() + INTERVAL '3 days', 1, 21, 8, 14, 4, NOW()),
-('Secure the throne and restore order', NOW() - INTERVAL '6 days', NOW() - INTERVAL '1 day', 1, 22, 8, 12, 4, NOW());
+('Investigate rumors in the capital tavern', NOW(), NOW() + INTERVAL '2' DAY, 1, 19, 8, 9, 2, NOW()),
+('Negotiate alliance with northern clans', NOW(), NOW() + INTERVAL '4' DAY, 1, 20, 8, 12, 3, NOW()),
+('Lead assault on the royal fortress', NOW(), NOW() + INTERVAL '3' DAY, 1, 21, 8, 14, 4, NOW()),
+('Secure the throne and restore order', NOW() - INTERVAL '6' DAY, NOW() - INTERVAL '1' DAY, 1, 22, 8, 12, 4, NOW());
 
 INSERT INTO rune (nm_rune, lk_image, cd_guild, ds_color, dt_creation)
 VALUES ('Backend', '#', 1, '#1E90FF', NOW()),
@@ -266,16 +262,16 @@ VALUES (1, 1),
 COMMIT;
 
 
-DO $$ 
-DECLARE 
-    r RECORD;
-BEGIN
-    -- Busca todas as sequências que pertencem ao esquema 'public'
-    FOR r IN (SELECT sequence_name 
-              FROM information_schema.sequences 
-              WHERE sequence_schema = 'public') 
-    LOOP
-        -- Executa o restart para cada uma delas voltando para 1
-        EXECUTE 'ALTER SEQUENCE ' || quote_ident(r.sequence_name) || ' RESTART WITH 1';
-    END LOOP;
-END $$;
+-- DO $$
+-- DECLARE
+--     r RECORD;
+-- BEGIN
+--     -- Busca todas as sequências que pertencem ao esquema 'public'
+--     FOR r IN (SELECT sequence_name
+--               FROM information_schema.sequences
+--               WHERE sequence_schema = 'public')
+--     LOOP
+--         -- Executa o restart para cada uma delas voltando para 1
+--         EXECUTE 'ALTER SEQUENCE ' || quote_ident(r.sequence_name) || ' RESTART WITH 1';
+--     END LOOP;
+-- END $$;

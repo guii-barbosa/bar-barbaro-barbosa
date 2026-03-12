@@ -1,4 +1,4 @@
-package com.guibs.bar_barbaro_barbosa.resource;
+package com.guibs.bar_barbaro_barbosa.artefact;
 
 import com.guibs.bar_barbaro_barbosa.attribute.Atributte;
 import jakarta.persistence.*;

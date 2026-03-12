@@ -2,7 +2,7 @@ package com.guibs.bar_barbaro_barbosa.attribute;
 
 import com.guibs.bar_barbaro_barbosa.ability.Ability;
 import com.guibs.bar_barbaro_barbosa.race.Race;
-import com.guibs.bar_barbaro_barbosa.resource.Artefact;
+import com.guibs.bar_barbaro_barbosa.artefact.Artefact;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
