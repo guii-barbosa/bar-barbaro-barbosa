@@ -1,4 +1,4 @@
-GET http://localhost:8080/adventurous
+GET http://localhost:8080/adventurous?page=2&size=5
 Accept: application/json
 
 ###
